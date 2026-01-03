@@ -1,0 +1,197 @@
+/* src/styles/CreateTasks.css - Only layout and header responsiveness */
+
+/* ========================================
+   CreateTasks Page Layout
+   ======================================== */
+
+.create-task-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+/* ========================================
+   Header Styles - Responsive
+   ======================================== */
+
+.create-task-page-header {
+  background-color: white;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 2rem 2.5rem;
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.create-task-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+.create-task-header-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.create-task-header-text h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.2;
+}
+
+.create-task-subtitle {
+  color: #64748b;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 700px;
+}
+
+/* .create-task-action-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.875rem 1.75rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+  flex-shrink: 0;
+}
+
+.create-task-action-btn:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+} */
+
+/* ========================================
+   Kanban Wrapper - Only layout
+   ======================================== */
+
+.kanban-wrapper {
+  width: 100%;
+  padding: 0 2.5rem 2.5rem 2.5rem;
+  background: #f8fafc;
+}
+
+/* ========================================
+   Responsive Design - Only Layout & Header
+   ======================================== */
+
+/* Large laptop screens */
+@media (max-width: 1440px) {
+  .create-task-page-header {
+    padding: 1.75rem 2rem;
+  }
+  
+  .kanban-wrapper {
+    padding: 0 2rem 2rem 2rem;
+  }
+}
+
+/* Tablet and smaller laptop screens */
+@media (max-width: 1024px) {
+  .create-task-page-header {
+    padding: 1.5rem 1.75rem;
+  }
+  
+  .create-task-header-content {
+    gap: 1.5rem;
+  }
+  
+  .create-task-header-text h1 {
+    font-size: 2rem;
+  }
+  
+  .create-task-subtitle {
+    font-size: 1rem;
+  }
+  
+  .kanban-wrapper {
+    padding: 0 1.75rem 1.75rem 1.75rem;
+  }
+}
+
+/* Tablet screens */
+@media (max-width: 768px) {
+  .create-task-page-header {
+    padding: 1.25rem 1.5rem;
+  }
+  
+  .create-task-header-content {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+  }
+  
+  .create-task-header-text {
+    min-width: auto;
+    text-align: center;
+  }
+  
+  .create-task-header-text h1 {
+    font-size: 1.75rem;
+  }
+  
+  .create-task-subtitle {
+    font-size: 0.875rem;
+  }
+  
+  .create-task-action-btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 48px;
+  }
+  
+  .kanban-wrapper {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 480px) {
+  .create-task-page-header {
+    padding: 1rem 1.25rem;
+  }
+  
+  .create-task-header-text h1 {
+    font-size: 1.5rem;
+  }
+  
+  .create-task-subtitle {
+    font-size: 0.875rem;
+  }
+  
+  .kanban-wrapper {
+    padding: 0 1.25rem 1.25rem 1.25rem;
+  }
+}
+
+/* ========================================
+   Accessibility
+   ======================================== */
+
+/* .create-task-action-btn:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+} */
+
+@media (prefers-reduced-motion: reduce) {
+  .create-task-action-btn {
+    transition: none;
+    transform: none;
+  }
+}

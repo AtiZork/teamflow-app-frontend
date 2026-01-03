@@ -1,0 +1,4 @@
+# public/robots.txt
+User-agent: *
+Allow: /
+Sitemap: https://teamflow-frontend-omega.vercel.app/sitemap.xml

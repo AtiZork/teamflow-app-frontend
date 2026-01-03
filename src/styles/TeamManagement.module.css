@@ -1,0 +1,947 @@
+/* src/styles/TeamManagement.module.css */
+.teamManagementContainer {
+    padding: 20px;
+}
+
+/* Tabs */
+.tabsContainer {
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 24px;
+}
+
+.tabs {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+}
+
+.tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.tab:hover {
+    color: #4b5563;
+    background-color: #f9fafb;
+}
+
+.tab.activeTab {
+    color: #3b82f6;
+    border-bottom-color: #3b82f6;
+    background-color: rgba(59, 130, 246, 0.05);
+}
+
+.tabIcon {
+    font-size: 16px;
+}
+
+.tabLabel {
+    font-weight: 500;
+}
+
+/* Loading States */
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    gap: 16px;
+}
+
+.loadingSpinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e5e7eb;
+    border-top-color: #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Team Overview Styles */
+.teamOverview {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Stats Grid */
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.statCard {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.statCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.statContent {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.statValue {
+    font-size: 24px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.statLabel {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.statIcon {
+    font-size: 24px;
+    color: #3b82f6;
+}
+
+/* Filters Section */
+.filtersSection {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    width: 100%;
+    padding: 14px 0;
+}
+
+.searchBox {
+    flex: 1 1 580px;
+    position: relative;
+    min-width: 220px;
+    max-width: 900px;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 10px 12px 10px 40px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.filterButtons {
+    display: flex;
+    gap: 8px;
+    margin-left: 12px;
+}
+
+.filterSelect {
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: white;
+    color: #374151;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.filterSelect:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+/* Table Styles */
+.tableContainer {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tableHeader {
+    display: flex;
+    background-color: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 12px 16px;
+    font-weight: 600;
+    color: #374151;
+    font-size: 14px;
+}
+
+.tableCell {
+    flex: 1;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.tableBody {
+    min-height: 200px;
+}
+
+.tableRow {
+    display: flex;
+    border-bottom: 1px solid #f3f4f6;
+    padding: 16px;
+    transition: background-color 0.2s ease;
+}
+
+.tableRow:hover {
+    background-color: #f9fafb;
+}
+
+.tableRow:last-child {
+    border-bottom: none;
+}
+
+/* Member Cell */
+.memberCell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #3b82f6;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.memberInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.memberName {
+    font-weight: 500;
+    color: #111827;
+}
+
+.memberEmail {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.memberPosition {
+    font-size: 12px;
+    color: #4b5563;
+}
+
+/* Badges */
+.roleBadge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.roleBadge.admin {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+.roleBadge.member {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.roleBadge.viewer {
+    background-color: #f3f4f6;
+    color: #374151;
+}
+
+.statusBadge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.statusBadge.active {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.statusBadge.inactive {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+/* Action Buttons */
+.actionButtons {
+    display: flex;
+    gap: 8px;
+}
+
+.editBtn,
+.toggleBtn {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    background: white;
+    color: #6b7280;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.editBtn:hover {
+    background-color: #3b82f6;
+    color: white;
+    border-color: #3b82f6;
+}
+
+.toggleBtn:hover {
+    background-color: #f3f4f6;
+}
+
+/* Empty State */
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 20px;
+    text-align: center;
+    color: #6b7280;
+}
+
+.emptyIcon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    color: #d1d5db;
+}
+
+.emptySubtext {
+    font-size: 14px;
+    color: #9ca3af;
+    margin-top: 4px;
+}
+
+/* Loading State */
+.loadingState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    gap: 12px;
+}
+
+.spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid #e5e7eb;
+    border-top-color: #3b82f6;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+
+    .tab {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .filtersSection {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filterButtons {
+        width: 100%;
+    }
+
+    .filterSelect {
+        flex: 1;
+    }
+
+    .tableHeader,
+    .tableRow {
+        flex-wrap: wrap;
+    }
+
+    .tableCell {
+        min-width: 100px;
+    }
+}
+
+
+
+/* Permissions Manager Specific Styles */
+.permissionsGrid {
+    display: grid;
+    grid-template-columns: 280px 1fr 280px;
+    gap: 24px;
+}
+
+.rolesSidebar,
+.membersSidebar {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+    height: fit-content;
+}
+
+.sidebarHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.addRoleBtn {
+    padding: 6px 12px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.addRoleBtn:hover {
+    background-color: #2563eb;
+}
+
+.roleList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.roleItem {
+    padding: 12px;
+    border: 1px solid #e5e7eb;
+    border-left: 3px solid;
+    border-radius: 6px;
+    background: white;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.roleItem:hover {
+    border-color: #d1d5db;
+    background-color: #f9fafb;
+}
+
+.roleItem.selectedRole {
+    border-color: #3b82f6;
+    background-color: rgba(59, 130, 246, 0.05);
+}
+
+.roleHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.roleName {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    color: #111827;
+}
+
+.roleColorDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.roleMemberCount {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.roleDescription {
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.4;
+}
+
+.permissionsPanel {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 24px;
+}
+
+.panelHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+}
+
+.panelSubtitle {
+    color: #6b7280;
+    margin-top: 4px;
+}
+
+.saveBtn {
+    padding: 10px 20px;
+    background-color: #10b981;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.saveBtn:hover:not(:disabled) {
+    background-color: #059669;
+}
+
+.saveBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.permissionCategory {
+    margin-bottom: 24px;
+}
+
+.categoryTitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.permissionItems {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.permissionItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background-color: #f9fafb;
+}
+
+.permissionInfo {
+    flex: 1;
+}
+
+.permissionLabel {
+    font-weight: 500;
+    color: #374151;
+}
+
+.permissionDescription {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 2px;
+}
+
+.toggleSwitch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.toggleSwitch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggleSlider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #d1d5db;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.toggleSlider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.toggleSlider {
+    background-color: #10b981;
+}
+
+input:checked+.toggleSlider:before {
+    transform: translateX(20px);
+}
+
+.dangerZone {
+    margin-top: 32px;
+    padding: 20px;
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 6px;
+}
+
+.dangerTitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #991b1b;
+    margin-bottom: 8px;
+}
+
+.dangerText {
+    color: #991b1b;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.dangerActions {
+    display: flex;
+    gap: 12px;
+}
+
+.dangerBtn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: opacity 0.2s ease;
+}
+
+.dangerBtn:hover {
+    opacity: 0.9;
+}
+
+.membersList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.memberItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    background-color: #f9fafb;
+}
+
+.memberAvatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #3b82f6;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.memberInfo {
+    flex: 1;
+}
+
+.memberName {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.memberEmail {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.editMemberBtn {
+    padding: 6px;
+    border: 1px solid #e5e7eb;
+    background: white;
+    border-radius: 4px;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.editMemberBtn:hover {
+    background-color: #f3f4f6;
+    color: #374151;
+}
+
+.noMembers {
+    text-align: center;
+    padding: 20px;
+    color: #6b7280;
+}
+
+.quickActions {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.quickActions h4 {
+    margin-bottom: 12px;
+    color: #374151;
+}
+
+.actionBtn {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    border: 1px solid #e5e7eb;
+    background: white;
+    border-radius: 6px;
+    color: #374151;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.actionBtn:hover {
+    background-color: #f3f4f6;
+    border-color: #d1d5db;
+}
+
+/* Form Styles for Modals */
+.formGroup {
+    margin-bottom: 16px;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #374151;
+}
+
+.formInput,
+.formSelect,
+.formTextarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.formInput:focus,
+.formSelect:focus,
+.formTextarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.formTextarea {
+    resize: vertical;
+    min-height: 80px;
+    font-family: inherit;
+}
+
+.formHelp {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+/* Cancel and Create Buttons */
+.cancelBtn {
+    padding: 10px 20px;
+    background-color: #f3f4f6;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cancelBtn:hover {
+    background-color: #e5e7eb;
+}
+
+.createBtn {
+    padding: 10px 20px;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.createBtn:hover {
+    background-color: #2563eb;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .permissionsGrid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .rolesSidebar,
+    .permissionsPanel,
+    .membersSidebar {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .permissionsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .panelHeader {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .saveBtn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .dangerActions {
+        flex-direction: column;
+    }
+
+    .modal {
+        margin: 20px;
+        max-height: 80vh;
+    }
+
+    .modalActions {
+        flex-direction: column;
+    }
+
+    .modalActions button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .attendanceTracking .tableHeader,
+    .attendanceTracking .tableRow {
+        flex-wrap: wrap;
+    }
+
+    .attendanceTracking .tableCell {
+        min-width: 120px;
+    }
+
+    .dateRange {
+        flex-direction: column;
+    }
+
+    .filterControls {
+        flex-direction: column;
+    }
+
+    .filterControls .exportBtn {
+        width: 100%;
+        justify-content: center;
+    }
+}

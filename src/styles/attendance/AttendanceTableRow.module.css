@@ -1,0 +1,292 @@
+.table-row {
+  border-bottom: 1px solid #F3F4F6;
+  transition: background-color 0.2s;
+}
+
+.table-row:hover {
+  background-color: #F9FAFB;
+}
+
+.table-row:nth-child(even) {
+  background-color: #F8FAFC;
+}
+
+.table-row:nth-child(even):hover {
+  background-color: #F1F5F9;
+}
+
+/* Employee Cell */
+.employee-cell {
+  padding: 16px 12px;
+}
+
+.employee-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.employee-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.employee-name {
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 2px;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.employee-email {
+  font-size: 12px;
+  color: #6B7280;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.employee-role {
+  font-size: 11px;
+  color: #9CA3AF;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Role Cell */
+.role-cell {
+  padding: 16px 12px;
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  background-color: #EFF6FF;
+  color: #1D4ED8;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+/* Time Cells */
+.time-cell {
+  padding: 16px 12px;
+  font-size: 13px;
+  color: #374151;
+}
+
+.time-value {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.late-indicator {
+  font-size: 11px;
+  color: #DC2626;
+  background-color: #FEF2F2;
+  padding: 2px 6px;
+  border-radius: 3px;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.active-indicator {
+  font-size: 12px;
+  color: #059669;
+  background-color: #ECFDF5;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.break-time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #F59E0B;
+}
+
+.break-icon {
+  font-size: 12px;
+}
+
+/* Status Cell */
+.status-cell {
+  padding: 16px 12px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+/* Location Cells */
+.location-cell {
+  padding: 16px 12px;
+  font-size: 13px;
+}
+
+.location-type {
+  color: #374151;
+  font-weight: 500;
+}
+
+.actual-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #6B7280;
+  max-width: 200px;
+}
+
+.location-icon {
+  font-size: 12px;
+  flex-shrink: 0;
+  color: #9CA3AF;
+}
+
+.actual-location span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Hours Cells */
+.hours-cell {
+  padding: 16px 12px;
+}
+
+.hours-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1F2937;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hours-progress {
+  flex: 1;
+  height: 4px;
+  background-color: #E5E7EB;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.hours-progress-bar {
+  height: 100%;
+  background-color: #10B981;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.hours-trend {
+  font-size: 12px;
+}
+
+.trend-up {
+  color: #10B981;
+}
+
+.trend-down {
+  color: #EF4444;
+}
+
+/* Attendance Cell */
+.attendance-cell {
+  padding: 16px 12px;
+}
+
+.attendance-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1F2937;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.attendance-progress {
+  height: 4px;
+  background-color: #E5E7EB;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.attendance-progress-bar {
+  height: 100%;
+  background-color: #3B82F6;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* Actions Cell */
+.actions-cell {
+  padding: 16px 12px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.view-btn,
+.export-btn {
+  padding: 8px;
+  border: 1px solid #E5E7EB;
+  background-color: white;
+  border-radius: 6px;
+  color: #6B7280;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view-btn:hover {
+  background-color: #F3F4F6;
+  border-color: #D1D5DB;
+  color: #374151;
+}
+
+.export-btn:hover {
+  background-color: #ECFDF5;
+  border-color: #10B981;
+  color: #10B981;
+}
+
+.view-btn svg,
+.export-btn svg {
+  font-size: 14px;
+}
+
+/* No Data State */
+.no-data {
+  color: #9CA3AF;
+  font-style: italic;
+  font-size: 13px;
+}
