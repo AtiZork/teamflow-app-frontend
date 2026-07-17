@@ -1,6 +1,6 @@
 // src/components/EmployeeDetailModal.jsx
 import { FiX, FiCalendar, FiMapPin, FiClock, FiActivity } from "react-icons/fi";
-import styles from "../styles/EmployeeDetailModal.module.css";
+import styles from "../../styles/EmployeeDetailModal.module.css";
 
 const EmployeeDetailModal = ({ employee, onClose }) => {
     if (!employee) return null;
