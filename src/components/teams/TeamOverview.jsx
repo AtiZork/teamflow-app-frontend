@@ -47,7 +47,7 @@ const TeamOverview = () => {
             user.full_name.split(" ").map((n) => n[0]).join("").toUpperCase().substring(0, 2) :
             user.email.substring(0, 2).toUpperCase(),
           phone: user.phone_number || "N/A",
-          department: "Software Engineer" // Hardcoded as requested
+          department: member.department || member.job_title || "—"
         }));
 
         setMembers(formattedMembers);

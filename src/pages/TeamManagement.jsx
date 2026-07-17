@@ -51,7 +51,7 @@ const TeamManagement = () => {
 
     const isAdmin = user.role === "admin" || user.role === "super_admin";
     if (!isAdmin) {
-      navigate("/unauthorized");
+      navigate(user.role === "member" ? "/member" : "/login");
       return;
     }
 

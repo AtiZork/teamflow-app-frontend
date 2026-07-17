@@ -246,14 +246,8 @@ export async function bulkSendInvitations(emails, role = "member") {
 // src/api/invitation.js
 export const getOrganizationMembers = async () => {
   try {
-    const orgId = localStorage.getItem("organization_id");
-    if (!orgId) {
-      console.warn("No organization ID found in localStorage");
-      return [];
-    }
-
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/organizations/${orgId}/members`, {
-      headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+    const res = await fetch(`${API_URL}/users/organization/members`, {
+      headers: authHeaders(),
     });
 
     if (!res.ok) throw new Error("Failed to fetch organization members");
