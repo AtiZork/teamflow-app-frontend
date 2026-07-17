@@ -4,6 +4,7 @@ import PricingCard from "./PricingCard";
 import toast from "react-hot-toast"; // ✅ Add this import
 import Loader from "./Loader";
 import "../../styles/plans.css";
+import { API_URL } from "../../config/apiConfig";
 
 const PricingSection = () => {
   const [loadingPrice, setLoadingPrice] = useState(null);
@@ -13,9 +14,6 @@ const PricingSection = () => {
   const [currentSubscription, setCurrentSubscription] = useState(null);
   const [subscriptionStatus, setSubscriptionStatus] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  const API_URL = "http://127.0.0.1:8000";
-
   useEffect(() => {
     checkAuthentication();
 

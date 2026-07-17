@@ -12,6 +12,7 @@ import { getProjects } from "../api/projects.js";
 import { getTasks } from "../api/tasks.js";
 import { getOrganizationMembers } from "../api/users.js";
 import { searchTasks } from "../api/tasks.js";
+import { getSalesPipelineReport } from "../api/salesMarketing.js";
 import "../styles/AdminDashboard.module.css";
 
 export default function AdminDashboard() {
@@ -22,6 +23,12 @@ export default function AdminDashboard() {
     members: 0,
     tasks: 0,
     completedTasks: 0,
+  });
+  const [salesStats, setSalesStats] = useState({
+    openItems: 0,
+    wonItems: 0,
+    openValue: 0,
+    overdueFollowups: 0,
   });
   const [loading, setLoading] = useState(true);
   const [searchLoading, setSearchLoading] = useState(false);
@@ -52,10 +59,11 @@ export default function AdminDashboard() {
     try {
       setLoading(true);
 
-      const [projectsData, tasksData, membersData] = await Promise.all([
+      const [projectsData, tasksData, membersData, salesReport] = await Promise.all([
         getProjects(),
         getTasks(),
         getOrganizationMembers(),
+        getSalesPipelineReport().catch(() => null),
       ]);
 
       const projectCount = Array.isArray(projectsData) ? projectsData.length : 0;
@@ -71,6 +79,13 @@ export default function AdminDashboard() {
         tasks: taskCount,
         completedTasks: completedTaskCount,
       });
+
+      setSalesStats({
+        openItems: salesReport?.open_items || 0,
+        wonItems: salesReport?.won_items || 0,
+        openValue: salesReport?.total_estimated_value || 0,
+        overdueFollowups: salesReport?.overdue_followups || 0,
+      });
     } catch (error) {
       console.error("Dashboard stats error:", error);
       toast.error(error.message || "Failed to load dashboard stats");
@@ -79,6 +94,12 @@ export default function AdminDashboard() {
         members: 0,
         tasks: 0,
         completedTasks: 0,
+      });
+      setSalesStats({
+        openItems: 0,
+        wonItems: 0,
+        openValue: 0,
+        overdueFollowups: 0,
       });
     } finally {
       setLoading(false);
@@ -234,6 +255,94 @@ export default function AdminDashboard() {
                   </div>
                 </div>
               )}
+            </div>
+
+            <div className="dashboard-block">
+              <div className="page-header" style={{ marginBottom: 16, padding: 0 }}>
+                <h1 style={{ fontSize: "1.25rem" }}>Sales & Marketing Snapshot</h1>
+                <p className="subtitle">Side-by-side reporting for pipeline work (separate from developer projects/tasks).</p>
+              </div>
+              {loading ? (
+                <div className="loading">Loading sales statistics...</div>
+              ) : (
+                <div className="stats-grid">
+                  <div className="stat-card">
+                    <div className="stat-header">
+                      <div className="stat-icon projects">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                      </div>
+                      <div className="stat-content">
+                        <h3>{salesStats.openItems}</h3>
+                        <p>Open Leads</p>
+                      </div>
+                    </div>
+                    <div className="stat-footer">Active sales/marketing pipeline items</div>
+                  </div>
+
+                  <div className="stat-card">
+                    <div className="stat-header">
+                      <div className="stat-icon members">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                      </div>
+                      <div className="stat-content">
+                        <h3>${Number(salesStats.openValue || 0).toLocaleString()}</h3>
+                        <p>Open Value</p>
+                      </div>
+                    </div>
+                    <div className="stat-footer">Estimated value in open pipeline</div>
+                  </div>
+
+                  <div className="stat-card">
+                    <div className="stat-header">
+                      <div className="stat-icon completed">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                      </div>
+                      <div className="stat-content">
+                        <h3>{salesStats.wonItems}</h3>
+                        <p>Won Deals</p>
+                      </div>
+                    </div>
+                    <div className="stat-footer">Closed-won pipeline items</div>
+                  </div>
+
+                  <div className="stat-card">
+                    <div className="stat-header">
+                      <div className="stat-icon tasks">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                      </div>
+                      <div className="stat-content">
+                        <h3>{salesStats.overdueFollowups}</h3>
+                        <p>Overdue Follow-ups</p>
+                      </div>
+                    </div>
+                    <div className="stat-footer">Needs attention from Sales/Marketing</div>
+                  </div>
+                </div>
+              )}
+              <div style={{ marginTop: 16 }}>
+                <button
+                  onClick={() => nav("/sales-marketing")}
+                  style={{
+                    background: "#3b82f6",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: 10,
+                    padding: "10px 14px",
+                    fontWeight: 600,
+                    cursor: "pointer",
+                  }}
+                >
+                  Open Sales & Marketing Pipeline
+                </button>
+              </div>
             </div>
 
             {/* Members List Block */}
