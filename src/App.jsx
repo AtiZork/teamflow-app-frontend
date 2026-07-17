@@ -22,14 +22,14 @@ import TimeSheet from './pages/TimeSheet';
 import CheckInOut from './pages/CheckInOut';
 import ManagerAttendance from './pages/ManagerAttendance';
 import TeamManagement from './pages/TeamManagement';
-import Leave from './pages/Leave'; // ✅ Added Leave import
-import LandingPage from './pages/LandingPage'; // ✅ Added Landing Page import
-
+import Leave from './pages/Leave';
+import LandingPage from './pages/LandingPage';
 
 import PlansPage from './pages/PlansPage';
 import PaymentSuccess from './pages/PaymentSuccess';
 import PaymentCancel from './pages/PaymentCancel';
-import AdminNotifications from './pages/AdminNotifications'; // ✅ Added Admin Notifications
+import AdminNotifications from './pages/AdminNotifications';
+import SalesMarketing from './pages/SalesMarketing';
 
 
 // =========================================
@@ -48,6 +48,8 @@ axios.interceptors.request.use(
   }
 );
 
+const ADMIN_ROLES = ["super_admin", "admin"];
+
 // =========================================
 // ✅ Protected Route Component
 // =========================================
@@ -57,10 +59,11 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
 
   if (loading) return <div>Loading...</div>;
 
-  if (!token) return <Navigate to="/login" />;
+  if (!token) return <Navigate to="/login" replace />;
 
   if (allowedRoles && !allowedRoles.includes(user?.role)) {
-    return <Navigate to={user?.role === 'admin' ? '/admin' : '/member'} />;
+    const fallback = ADMIN_ROLES.includes(user?.role) ? "/admin" : "/member";
+    return <Navigate to={fallback} replace />;
   }
 
   return children;
@@ -95,34 +98,68 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/member" element={<MemberDashboard />} />
-        <Route path="/projects" element={<CreateProjects />} />
-        <Route path="/create-task" element={<CreateTasks />} />
-        <Route path="/invite-user" element={<InviteUser />} />
         <Route path="/accept-invitation" element={<AcceptInvitation />} />
-        <Route path="/reports" element={<Reports />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/support" element={<HelpSupport />} />
-        <Route path="/timesheet" element={<TimeSheet />} />
 
-        {/* Role-based Attendance Routes */}
+        <Route path="/admin" element={
+          <ProtectedRoute allowedRoles={ADMIN_ROLES}>
+            <AdminDashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/member" element={
+          <ProtectedRoute>
+            <MemberDashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/projects" element={
+          <ProtectedRoute allowedRoles={ADMIN_ROLES}>
+            <CreateProjects />
+          </ProtectedRoute>
+        } />
+        <Route path="/create-task" element={
+          <ProtectedRoute allowedRoles={ADMIN_ROLES}>
+            <CreateTasks />
+          </ProtectedRoute>
+        } />
+        <Route path="/invite-user" element={
+          <ProtectedRoute allowedRoles={ADMIN_ROLES}>
+            <InviteUser />
+          </ProtectedRoute>
+        } />
+        <Route path="/reports" element={
+          <ProtectedRoute allowedRoles={ADMIN_ROLES}>
+            <Reports />
+          </ProtectedRoute>
+        } />
+        <Route path="/profile" element={
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        } />
+        <Route path="/support" element={
+          <ProtectedRoute>
+            <HelpSupport />
+          </ProtectedRoute>
+        } />
+        <Route path="/timesheet" element={
+          <ProtectedRoute>
+            <TimeSheet />
+          </ProtectedRoute>
+        } />
+
         <Route path="/attendance" element={
-          <ProtectedRoute allowedRoles={["super_admin", "admin"]}>
+          <ProtectedRoute allowedRoles={ADMIN_ROLES}>
             <ManagerAttendance />
           </ProtectedRoute>
         } />
 
-        {/* Team Management - Admin Only */}
         <Route path="/team-management" element={
-          <ProtectedRoute allowedRoles={["super_admin", "admin"]}>
+          <ProtectedRoute allowedRoles={ADMIN_ROLES}>
             <TeamManagement />
           </ProtectedRoute>
         } />
 
-        {/* Admin Notifications */}
         <Route path="/admin/notifications" element={
-          <ProtectedRoute allowedRoles={["super_admin", "admin"]}>
+          <ProtectedRoute allowedRoles={ADMIN_ROLES}>
             <AdminNotifications />
           </ProtectedRoute>
         } />
@@ -133,17 +170,41 @@ function App() {
           </ProtectedRoute>
         } />
 
-        {/* Legacy route alias */}
-        <Route path="/check-in-out" element={<CheckInOut />} />
-        <Route path="/leave" element={<Leave />} /> {/* ✅ Added Leave route */}
+        <Route path="/check-in-out" element={
+          <ProtectedRoute>
+            <CheckInOut />
+          </ProtectedRoute>
+        } />
+        <Route path="/leave" element={
+          <ProtectedRoute>
+            <Leave />
+          </ProtectedRoute>
+        } />
 
-        {/* 🔥 FIX: Update these routes to match Stripe redirect URLs */}
-        <Route path="/plans" element={<PlansPage />} />
-        <Route path="/payment/success" element={<PaymentSuccess />} />
-        <Route path="/payment/cancel" element={<PaymentCancel />} />
+        <Route path="/sales-marketing" element={
+          <ProtectedRoute>
+            <SalesMarketing />
+          </ProtectedRoute>
+        } />
 
-        {/* 🔹 Default Redirects */}
-        <Route path="*" element={<Navigate to="/login" />} />
+        <Route path="/plans" element={
+          <ProtectedRoute allowedRoles={ADMIN_ROLES}>
+            <PlansPage />
+          </ProtectedRoute>
+        } />
+        <Route path="/payment/success" element={
+          <ProtectedRoute>
+            <PaymentSuccess />
+          </ProtectedRoute>
+        } />
+        <Route path="/payment/cancel" element={
+          <ProtectedRoute>
+            <PaymentCancel />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/unauthorized" element={<Navigate to="/login" replace />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </>
   );

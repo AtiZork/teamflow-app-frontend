@@ -9,7 +9,10 @@ import {
     FiCheckSquare,
     FiClock,
     FiCalendar,
-    FiBarChart2
+    FiBarChart2,
+    FiBell,
+    FiCreditCard,
+    FiTrendingUp
 } from "react-icons/fi";
 import {
     ChevronLeft,
@@ -55,9 +58,8 @@ const SidebarContent = () => {
 
     // Get user initials
     const getUserInitials = () => {
-        // Fallback or use real user name if available in user object
-        const name = user?.name || "Anna Taylor";
-        return name.split(' ').map(n => n[0]).join('').toUpperCase();
+        const name = user?.full_name || user?.name || "User";
+        return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) || "U";
     };
 
     return (
@@ -96,18 +98,23 @@ const SidebarContent = () => {
                         <>
                             <MenuItem to="/admin" icon={FiHome} label="Dashboard" />
                             <MenuItem to="/my-attendance" icon={FiLogIn} label="Check In/Out" />
+                            <MenuItem to="/attendance" icon={FiClock} label="Attendance" />
                             <MenuItem to="/team-management" icon={FiUsers} label="Team Management" />
                             <MenuItem to="/projects" icon={FiFolder} label="Projects" />
                             <MenuItem to="/create-task" icon={FiCheckSquare} label="Tasks" />
                             <MenuItem to="/timesheet" icon={FiClock} label="Time Sheet" />
                             <MenuItem to="/invite-user" icon={FiUsers} label="Invite Users" />
+                            <MenuItem to="/sales-marketing" icon={FiTrendingUp} label="Sales & Marketing" />
                             <MenuItem to="/leave" icon={FiCalendar} label="Apply Leave" />
+                            <MenuItem to="/admin/notifications" icon={FiBell} label="Notifications" />
                             <MenuItem to="/reports" icon={FiBarChart2} label="Reports" />
+                            <MenuItem to="/plans" icon={FiCreditCard} label="Plans" />
                         </>
                     ) : (
                         <>
                             <MenuItem to="/member" icon={FiHome} label="Dashboard" />
                             <MenuItem to="/my-attendance" icon={FiLogIn} label="Check In/Out" />
+                            <MenuItem to="/sales-marketing" icon={FiTrendingUp} label="Sales & Marketing" />
                             <MenuItem to="/timesheet" icon={FiClock} label="Time Sheet" />
                             <MenuItem to="/leave" icon={FiCalendar} label="Apply Leave" />
                         </>
